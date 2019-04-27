@@ -13,7 +13,9 @@ router.get('/new', authenticated, (req, res) => {
 
 //create的行為
 router.post('/', authenticated, (req, res) => {
-  const restaurant = rstModels(req.body)
+  const restaurant = rstModels({ 
+    ...req.body,
+    userId: req.user._id})
 
   restaurant.save(err => {
     if (err) return console.error(err)
